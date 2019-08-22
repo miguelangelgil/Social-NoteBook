@@ -1,3 +1,11 @@
+<?php
+/*
+Autor: Miguel Ángel Gil Martín (MAGMa)
+Esta obra está licenciada bajo la Licencia Creative Commons Atribución-CompartirIgual 4.0 
+Internacional. Para ver una copia de esta licencia, 
+visite http://creativecommons.org/licenses/by-sa/4.0/.
+*/
+?>
 <?php include_once '../classes/user.php' ?>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

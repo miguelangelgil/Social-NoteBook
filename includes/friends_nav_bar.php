@@ -1,3 +1,11 @@
+<?php
+/*
+Autor: Miguel Ángel Gil Martín (MAGMa)
+Esta obra está licenciada bajo la Licencia Creative Commons Atribución-CompartirIgual 4.0 
+Internacional. Para ver una copia de esta licencia, 
+visite http://creativecommons.org/licenses/by-sa/4.0/.
+*/
+?>
 <?php//barra de navegacion para administrar amigos?>
 <div class="d-flex justify-content-center">
     <div class="col-8">
