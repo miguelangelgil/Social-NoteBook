@@ -6,7 +6,7 @@
   
      Tables:
 
-       * users:
+        users:
             CREATE TABLE `users` (
             `id` bigint(20) NOT NULL AUTO_INCREMENT,
             `name` varchar(255) NOT NULL,
@@ -15,7 +15,7 @@
             PRIMARY KEY (`id`)
             ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8
 
-       * notes:
+        notes:
             CREATE TABLE `notes` (
             `id` bigint(6) NOT NULL AUTO_INCREMENT,
             `title` varchar(255) NOT NULL,
@@ -25,7 +25,7 @@
             PRIMARY KEY (`id`)
             ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8
 
-       * friends:
+        friends:
             CREATE TABLE `friends` (
             `id` bigint(6) NOT NULL AUTO_INCREMENT,
             `id_user` bigint(6) NOT NULL,
@@ -34,7 +34,7 @@
             PRIMARY KEY (`id`)
             ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8
 
-       * shared_notes:
+        shared_notes:
             CREATE TABLE `shared_notes` (
             `id` bigint(6) NOT NULL AUTO_INCREMENT,
             `id_nota` bigint(6) NOT NULL,
