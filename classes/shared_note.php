@@ -40,6 +40,11 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
         }
         public function editPermissions($id, $read_permission, $write_permission)
         {
+            if(!$read_permission && !$write_permission)
+            {
+                $this->revokePermissions($id);
+                exit();
+            }
             try{
                 $this->database = new Connection();
                 $this->db = $this->database->openConnection();
@@ -89,6 +94,31 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
             }
 
         }
+        public function getSharedByIdNote($id_note)
+        {
+            try
+            {
+                $this->database = new Connection();
+                $this->db = $this->database->openConnection();
+                $query = $this->db->prepare('SELECT * FROM shared_notes WHERE id_note = :note');
+                $query->execute(['note' => $id_note]);
+                if ($query->rowCount () > 0)
+                {
+                    return $query;
+                }
+                return false;
+            }
+            catch (PDOException $e)
+            {
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        There is some problem in connection: <?=$e->getMessage();?>
+                    </div>
+                <?php
+            }
+
+        }
+
         public function getSharedByIdNoteIdFrien($id_note, $id_friend)
         {
             try
@@ -99,7 +129,7 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
                 $query->execute(['note' => $id_note, 'friend' => $id_friend]);
                 if ($query->rowCount () > 0)
                 {
-                    return $query->fetch(PDO::FETCH_LAZY);;
+                    return $query->fetch(PDO::FETCH_LAZY);
                 }
                 return false;
             }

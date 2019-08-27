@@ -7,16 +7,18 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
 */
 ?>
 <?php
-     include_once '../includes/header.php';
-     include_once '../includes/check_session.php';
-     include_once '../includes/user_nav_bar.php';
-     include_once '../classes/note.php';
-     include_once '../classes/shared_note.php';
-    $note = new Note();
-    $shared = new SharedNote();
-    $result = $note->getAllUserNotes($user->getId());
+ include_once '../includes/header.php';
+ include_once '../includes/check_session.php';
+ include_once '../includes/user_nav_bar.php';
+ include_once '../classes/shared_note.php';
+ include_once '../classes/friend.php';
+ include_once '../classes/note.php';
 
+ $shared = new SharedNote();
+ $note = new Note();
+ $result = $note->getAllUserSharedNotesByIdUser($user->getId());
 ?>
+
 <br>
     <div class="d-flex justify-content-center">
         <div class="col-8">
@@ -37,9 +39,15 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
         <li class="list-group-item">
             <div class="d-flex flex-row-reverse bd-highlight">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                    <a class="btn btn-primary" href="update_note.php?id=<?php echo $note_list["id"] ; ?>" role="button" name = "edit_note"><i class="fas fa-edit"></i></a>
-                    <a class="btn btn-success" href="share_note_friend_list.php?id=<?= $note_list['id'];?>" role="button" name = "shared_note"><i class="fas fa-share-alt-square"></i></a>
-                    <a class="btn btn-danger" href="?eliminar=<?= $note_list["id"] ; ?>" role="button"><i class="fas fa-trash-alt"></i></a>
+                <a class="btn btn-primary" href="update_note.php?id=<?php echo $note_list["id"] ; ?>" role="button" name = "edit_note"><i class="fas fa-edit"></i></a>
+                    <?php
+                        if($note_list['id_user'] == $user->getId())
+                        {
+                            ?>
+                            <a class="btn btn-danger" href="?eliminar=<?= $note_list["id"] ; ?>" role="button"><i class="fas fa-trash-alt"></i></a>
+                            <?php
+                        }
+                    ?>
                 </div>
                 <p class="text-secondary" style="margin-right:10px;"><?php echo $note_list['date'];?></p>
                 <?php
@@ -69,7 +77,9 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
     </div>
     </div>
     
-    <?php
-    
-    include_once '../includes/footer.php';
-    ?>
+
+
+
+<?php
+include_once '../includes/footer.php';
+?>

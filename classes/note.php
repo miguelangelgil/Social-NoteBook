@@ -70,6 +70,28 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
             }
 
         }
+        //esto trae todas las notas que has compartido y las que te han compartido
+        public function getAllUserSharedNotesByIdUser($id)
+        {
+            try
+            {
+                $this->database = new Connection();
+                $this->db = $this->database->openConnection();
+                $query = $this->db->prepare('SELECT * FROM notes JOIN shared_notes ON notes . id = shared_notes . id_note AND notes . id_user = :id_user OR notes . id = shared_notes . id_note AND shared_notes . id_friend = :id_user  GROUP BY notes . id');
+                $query->execute(['id_user' => $id]);
+                return $query;
+            }
+            catch (PDOException $e)
+            {
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        There is some problem in connection: <?=$e->getMessage();?>
+                    </div>
+                <?php
+            }
+
+
+        }
 
         public function getAllUserNotes($id_user)
         {

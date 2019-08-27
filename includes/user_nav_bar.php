@@ -22,7 +22,7 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
         <a class="nav-link" href="../view/note_list.php"><i class="fas fa-sticky-note"></i> My notes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-share-alt-square"></i> Shared notes</a>
+        <a class="nav-link" href="../view/shared_notes_list.php"><i class="fas fa-share-alt-square"></i> Shared notes</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../view/friend_list.php"><i class="fas fa-users"></i> Friends</a>
