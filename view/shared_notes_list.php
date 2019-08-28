@@ -29,12 +29,12 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
     if(isset($_GET['eliminar']))
     {
         $note->deleteNote($_GET['eliminar']);
-        header("Location: note_list.php");
+        header("Location: shared_notes_list.php");
     }
 
     foreach($result as $note_list)
     {
-        $shared_note = $shared->getSharedByIdNote($note_list['id']);
+        $shared_note = $shared->getSharedByIdNote($note_list['id_note']);
         ?>
         <li class="list-group-item">
             <div class="d-flex flex-row-reverse bd-highlight">
@@ -44,7 +44,7 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
                         if($note_list['id_user'] == $user->getId())
                         {
                             ?>
-                            <a class="btn btn-danger" href="?eliminar=<?= $note_list["id"] ; ?>" role="button"><i class="fas fa-trash-alt"></i></a>
+                            <a class="btn btn-danger" href="?eliminar=<?= $note_list["id"];?>" role="button"><i class="fas fa-trash-alt"></i></a>
                             <?php
                         }
                     ?>
@@ -64,8 +64,14 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
                             "><i class="fas fa-user-friends"></i></p>
                         <?php
                     }
+                    if($note_list['id_user'] != $user->getId())
+                    {
+                        ?>
+                        <p class="text-secondary" style="margin-right:10px;"><i class="fas fa-crown"></i> <?=$user->getUserById($note_list['id_user'])['name']?></p>
+                        <?php
+                    }
                 ?>
-                <a class="text-secondary" role="button" href="note.php?id=<?= $note_list["id"] ; ?>" style="margin-right:auto;"><?php echo $note_list['title'];?></a>
+                <a class="text-secondary" role="button" href="note.php?id=<?= $note_list['id_note'];?>" style="margin-right:auto;"><?php echo $note_list['title'];?></a>
             </div>
         </li>
         <?php

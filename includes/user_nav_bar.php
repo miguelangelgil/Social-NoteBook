@@ -15,16 +15,16 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
   </button>
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <li class="nav-item<?php if($_SERVER['REQUEST_URI'] == '/social_notebook/view/new_note.php'){?> active <?php }?>">
+      <li class="nav-item<?php if(strpos($_SERVER['REQUEST_URI'], 'new_note.php') != false){?> active <?php }?>">
         <a class="nav-link" href="../view/new_note.php"><i class="fas fa-plus-square"></i> <span class="sr-only">(current)</span>Add note</a>
       </li>
-      <li class="nav-item<?php if($_SERVER['REQUEST_URI'] == '/social_notebook/view/note_list.php'){?> active <?php }?>">
+      <li class="nav-item<?php if(strpos($_SERVER['REQUEST_URI'], 'note_list.php') != false){?> active <?php }?>">
         <a class="nav-link" href="../view/note_list.php"><i class="fas fa-sticky-note"></i> My notes</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item<?php if(strpos($_SERVER['REQUEST_URI'], 'shared_notes_list.php') != false){?> active <?php }?>">
         <a class="nav-link" href="../view/shared_notes_list.php"><i class="fas fa-share-alt-square"></i> Shared notes</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item<?php if(strpos($_SERVER['REQUEST_URI'], 'friend_list.php') != false){?> active <?php }?>">
         <a class="nav-link" href="../view/friend_list.php"><i class="fas fa-users"></i> Friends</a>
       </li>
       </li>

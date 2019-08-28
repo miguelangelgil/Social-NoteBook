@@ -11,11 +11,9 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
   include_once '../includes/check_session.php';
   include_once '../includes/user_nav_bar.php';
   include_once '../classes/note.php';
+  include_once '../includes/check_permissions.php';
   $note = new Note();
-  $currentNote;
-     
-$currentNote = $note->getNote($_GET['id']);
-if($user->getId() != $currentNote['id_user'])exit();
+  $currentNote = $note->getNote($_GET['id']);
 //formulario para crear una nota  
 ?>
 <br>

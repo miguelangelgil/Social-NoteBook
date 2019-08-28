@@ -12,11 +12,10 @@ include_once '../includes/header.php';
 include_once '../includes/check_session.php';
 include_once '../includes/user_nav_bar.php';
 include_once '../classes/note.php';
+include_once '../includes/check_permissions.php';
 
 $note = new Note();
 $currentNote = $note->getNote($_GET['id']);
-
-if($user->getId() != $currentNote['id_user'])exit();
 ?>
 <br>
 <div class="d-flex justify-content-center">
