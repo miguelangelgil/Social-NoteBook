@@ -37,7 +37,7 @@
         shared_notes:
             CREATE TABLE `shared_notes` (
             `id` bigint(6) NOT NULL AUTO_INCREMENT,
-            `id_nota` bigint(6) NOT NULL,
+            `id_note` bigint(6) NOT NULL,
             `id_friend` bigint(6) NOT NULL,
             `read_permission` tinyint(1) NOT NULL DEFAULT 0,
             `write_permission` tinyint(1) NOT NULL DEFAULT 0,
