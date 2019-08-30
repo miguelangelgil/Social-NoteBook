@@ -25,12 +25,6 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
             <ul class="list-group">
  
 <?php
-    
-    if(isset($_GET['eliminar']))
-    {
-        $note->deleteNote($_GET['eliminar']);
-        header("Location: shared_notes_list.php");
-    }
 
     foreach($result as $note_list)
     {
@@ -39,12 +33,17 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
         <li class="list-group-item">
             <div class="d-flex flex-row-reverse bd-highlight">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                <a class="btn btn-primary" href="update_note.php?id=<?php echo $note_list["id"] ; ?>" role="button" name = "edit_note"><i class="fas fa-edit"></i></a>
                     <?php
+                        if($shared->getSharedByIdNoteIdFrien($note_list['id_note'], $user->getId())['write_permission'] == true || $note_list['id_user'] == $user->getId())
+                        {
+                            ?>
+                                <a class="btn btn-primary" href="update_note.php?id=<?php echo $note_list["id"] ; ?>" role="button" name = "edit_note"><i class="fas fa-edit"></i></a>
+                            <?php
+                        }
                         if($note_list['id_user'] == $user->getId())
                         {
                             ?>
-                            <a class="btn btn-danger" href="?eliminar=<?= $note_list["id"];?>" role="button"><i class="fas fa-trash-alt"></i></a>
+                            <a class="btn btn-warning" href="?settings=<?= $note_list["id"];?>" role="button"><i class="fas fa-ellipsis-v"></i></a>
                             <?php
                         }
                     ?>
@@ -61,13 +60,13 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
                                     echo $user->getUserById($shared_friend['id_friend'])['name'];?>&#47;<?php
                                 }
                             ?>
-                            "><i class="fas fa-user-friends"></i></p>
+                            "><i style="color: #005BFF;" class="fas fa-user-friends"></i></p>
                         <?php
                     }
                     if($note_list['id_user'] != $user->getId())
                     {
                         ?>
-                        <p class="text-secondary" style="margin-right:10px;"><i class="fas fa-crown"></i> <?=$user->getUserById($note_list['id_user'])['name']?></p>
+                        <p class="text-secondary" style="margin-right:10px;"><i style="color: #FFD000;" class="fas fa-crown"></i> <?=$user->getUserById($note_list['id_user'])['name']?></p>
                         <?php
                     }
                 ?>

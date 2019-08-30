@@ -1,0 +1,1 @@
+<?php//TODO: funciones con sobrecarga para cata tipo de lista de la aplicación?>

@@ -13,6 +13,7 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
     include_once '../includes/user_nav_bar.php';
     include_once '../classes/friend.php';
     include_once '../includes/friends_nav_bar.php';
+    include_once '../classes/shared_note.php';
     $friend = new Friend();
 
     $result = $friend->getFriendsByIdUser($user->getId());

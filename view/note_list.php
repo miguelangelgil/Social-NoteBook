@@ -53,7 +53,7 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
                                     echo $user->getUserById($shared_friend['id_friend'])['name'];?>&#47;<?php
                                 }
                             ?>
-                            "><i class="fas fa-user-friends"></i></p>
+                            "><i style="color: #005BFF;" class="fas fa-user-friends"></i></p>
                         <?php
                     }
                 ?>
