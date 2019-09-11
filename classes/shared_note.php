@@ -164,6 +164,33 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
             }
 
         }
+        public function switchOwnerToFriend($id_current_user,$id_new_user,$id_note)
+        {
+            try{
+                $this->database = new Connection();
+                $this->db = $this->database->openConnection();
+                // inserting data into create table using prepare statement to prevent from sql injections
+                $sql = "UPDATE shared_notes SET id_friend = ? WHERE id_friend = ? AND id_note = ?";
+                $result = $this->db->prepare($sql);
+                $result->execute([$id_current_user, $id_new_user, $id_note]);
+                ?>
+                    <div class="alert alert-success" role="alert">
+                        Shared successfully
+                    </div>
+                <?php
+                return true;
+            }
+            catch (PDOException $e)
+            {
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        There is some problem in connection: <?=$e->getMessage();?>
+                    </div>
+                <?php
+                return false;
+            }
+
+        }
 
         public function revokePermissions($id)
         {

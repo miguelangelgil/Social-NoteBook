@@ -16,7 +16,7 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
 
  $shared = new SharedNote();
  $note = new Note();
- $result = $note->getAllUserSharedNotesByIdUser($user->getId());
+ $result = $note->getAllSharedNotesWithYouFromFriend($user->getId(),$_GET['friend']);
 
  if($result == false)
  {
@@ -46,12 +46,6 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
                             {
                                 ?>
                                     <a class="btn btn-primary" href="update_note.php?id=<?php echo $note_list["id"] ; ?>" role="button" name = "edit_note"><i class="fas fa-edit"></i></a>
-                                <?php
-                            }
-                            if($note_list['id_user'] == $user->getId())
-                            {
-                                ?>
-                                <a class="btn btn-warning" href="permissions_note.php?settings=<?= $note_list['id_note'];?>"><i class="fas fa-ellipsis-v"></i></a>
                                 <?php
                             }
                         ?>

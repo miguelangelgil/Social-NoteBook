@@ -97,6 +97,31 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
 
         }
 
+        public function getAllSharedNotesWithYouFromFriend($id_user, $id_friend)
+        {
+            try
+            {
+                $this->database = new Connection();
+                $this->db = $this->database->openConnection();
+                $query = $this->db->prepare('SELECT * FROM notes JOIN shared_notes ON notes . id = shared_notes . id_note AND notes . id_user = :id_friend AND shared_notes . id_friend = :id_user GROUP BY notes . id');
+                $query->execute(['id_user' => $id_user, 'id_friend' => $id_friend]);
+                if ($query->rowCount () > 0)
+                {
+                    return $query;
+                }
+                return false;
+            }
+            catch (PDOException $e)
+            {
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        There is some problem in connection: <?=$e->getMessage();?>
+                    </div>
+                <?php
+            }
+
+        }
+
         public function getAllUserNotes($id_user)
         {
             try
@@ -114,6 +139,33 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
                         There is some problem in connection: <?=$e->getMessage();?>
                     </div>
                 <?php
+            }
+
+        }
+        public function changeOwner($id_note, $id_owner)
+        {
+            try{
+                $this->database = new Connection();
+                $this->db = $this->database->openConnection();
+                // inserting data into create table using prepare statement to prevent from sql injections
+                $sql = "UPDATE notes SET id_user = ? WHERE notes . id = ?";
+                $result = $this->db->prepare($sql);
+                $result->execute([$id_owner, $id_note]);
+                ?>
+                    <div class="alert alert-success" role="alert">
+                        Owner changed successfully
+                    </div>
+                <?php
+                return true;
+            }
+            catch (PDOException $e)
+            {
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        There is some problem in connection: <?=$e->getMessage();?>
+                    </div>
+                <?php
+                return false;
             }
 
         }

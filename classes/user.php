@@ -12,7 +12,7 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
 
     class User 
     {
-        private $user_name;
+        private $name;
         private $id;
         private $database;
         private $db;
@@ -98,7 +98,7 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
                 $query->execute(['user' => $user]);
             
             foreach ($query as $currentUser) {
-                $this->nombre = $currentUser['name'];
+                $this->name = $currentUser['name'];
                 $this->id = $currentUser['id'];
             }
                 return true;
@@ -186,7 +186,7 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
         }
     
         public function getName(){
-            return $this->nombre;
+            return $this->name;
         }
     
          public function getId(){

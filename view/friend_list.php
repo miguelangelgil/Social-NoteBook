@@ -13,9 +13,9 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
     include_once '../includes/user_nav_bar.php';
     include_once '../classes/friend.php';
     include_once '../includes/friends_nav_bar.php';
-    include_once '../classes/shared_note.php';
+    include_once '../classes/note.php';
     $friend = new Friend();
-
+    $note = new Note();
     $result = $friend->getFriendsByIdUser($user->getId());
 
     if(isset($_GET['eliminar']))
@@ -42,11 +42,13 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
                 {
                     foreach($result as $myfriend)
                     {
+                        $id_friend = $myfriend['id_user'] == $user->getId()?$myfriend['id_friend']:$myfriend['id_user'];
+                        $shared_notes_with_you = $note->getAllSharedNotesWithYouFromFriend($user->getId(),$id_friend);
                         ?>
                         <li class="list-group-item">
                             <div class="d-flex flex-row-reverse bd-highlight">
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                                    <a class="btn btn-primary" href="#" role="button" name = "edit_note"><i class="fas fa-sticky-note"></i>  <span class="badge badge-light">0</span></a>
+                                    <a class="btn btn-primary" href="note_list_shared_friend.php?friend=<?=$id_friend?>" role="button" name = "edit_note"><i class="fas fa-sticky-note"></i>  <span class="badge badge-light"><?=$shared_notes_with_you == false ? 0 : $shared_notes_with_you->rowCount();?></span></a>
                                     <a class="btn btn-danger" href="?eliminar=<?= $myfriend["id"];?>" role="button"><i class="fas fa-times"></i></a>
                                 </div>
                                 <?php

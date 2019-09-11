@@ -6,78 +6,22 @@ Internacional. Para ver una copia de esta licencia,
 visite http://creativecommons.org/licenses/by-sa/4.0/.
 */
 ?>
-<?php
-    include_once '../includes/header.php';
-    include_once '../includes/check_session.php';
-    include_once '../includes/user_nav_bar.php';
-    include_once '../classes/shared_note.php';
-    include_once '../classes/friend.php';
-    include_once '../classes/note.php';
-    $shared = new SharedNote();
-    $friend = new Friend();
-    $currentFriends = $friend->getFriendsByIdUser($user->getId());
-    $note = new Note();
-    $currentNote;
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Permissions</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
     
-    if(isset($_GET['id']))
-    {
-        $currentNote = $note->getNote($_GET['id']);
-    }
-    if(!isset($_GET['shared']))$_GET['shared']=false;
-    if(isset($_GET['shared_view']))
-    {
-        if($_GET['shared'] != false)
-        {
-            $note_shared = $shared->getSharedById($_GET['shared']);
-            if($note_shared['write_permission']==false)
-            {
-                $shared->editPermissions($_GET['shared'], false, false);
+        <?php
+        $shared_friends = $shared->getSharedByIdNote($_GET['settings']);
 
-            }else
-            {
-                $shared->editPermissions($_GET['shared'], true, false);
-            }
-
-            
-            
-        }else
-        {
-            $shared->share($_GET['id'], $_GET['shared_view'],true, false);
-        }
-        
-    }
-    if(isset($_GET['shared_edit']))
-    {
-        if($_GET['shared'] != false)
-        {
-            $note_shared = $shared->getSharedById($_GET['shared']);
-            $shared->editPermissions($_GET['shared'], $note_shared['read_permission'], !$note_shared['write_permission']);
-
-        }else
-        {
-            $shared->share($_GET['id'], $_GET['shared_edit'],true, true);
-        }
-
-    }
-    
-?>
-
-<br>
-    <div class="d-flex justify-content-center">
-        <div class="col-8">
-            <ul class="list-group">
-
-            <?php
-                if($currentFriends->rowCount() < 1)
-                {
-                    ?>
-                        <h1 class="text-center text-muted">Don't Found Friends<h1>
-                    <?php
-                   
-                }
-                else
-                {
-                    foreach($currentFriends as $myfriend)
+        foreach($currentFriends as $shared_friends)
                     {      
                         ?>
                         <li class="list-group-item">
@@ -113,14 +57,15 @@ visite http://creativecommons.org/licenses/by-sa/4.0/.
     
                         <?php
                     }
-
-                }
-               
-            ?>
-                </ul>
-
-        </div>
+        
+        ?>
+        
+       
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
-    <?php
-        include_once '../includes/footer.php';
-    ?>
+  </div>
+</div>
