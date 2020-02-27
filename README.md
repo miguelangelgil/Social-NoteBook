@@ -53,6 +53,6 @@ Internacional. Para ver una copia de esta licencia,
 visite http://creativecommons.org/licenses/by-sa/4.0/.
 
 ## Webside
-social-notebook.mag-ma.online
+http://social-notebook.mag-ma.online
 
 
